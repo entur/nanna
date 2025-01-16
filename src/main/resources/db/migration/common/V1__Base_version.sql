@@ -1,10 +1,3 @@
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 9.5.2
--- Dumped by pg_dump version 9.5.2
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -13,16 +6,8 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
@@ -31,10 +16,6 @@ SET search_path = public, pg_catalog;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
-
---
--- Name: chouette_info; Type: TABLE; Schema: public; Owner: nanna
---
 
 CREATE TABLE chouette_info (
     id bigint NOT NULL,
@@ -60,10 +41,6 @@ CREATE TABLE chouette_info (
 
 ALTER TABLE chouette_info OWNER TO nanna;
 
---
--- Name: provider; Type: TABLE; Schema: public; Owner: nanna
---
-
 CREATE TABLE provider (
     id bigint NOT NULL,
     name character varying(255),
@@ -79,10 +56,6 @@ create table chouette_info_service_link_modes (
     transport_mode character varying(255) NOT NULL
 );
 
---
--- Name: chouette_info_pkey; Type: CONSTRAINT; Schema: public; Owner: nanna
---
-
 ALTER TABLE ONLY chouette_info
     ADD CONSTRAINT chouette_info_pkey PRIMARY KEY (id);
 
@@ -90,24 +63,11 @@ alter table chouette_info_service_link_modes
     add constraint chouette_info_service_link_modes_pk
         primary key (chouette_info_id, transport_mode);
 
---
--- Name: provider_pkey; Type: CONSTRAINT; Schema: public; Owner: nanna
---
-
 ALTER TABLE ONLY provider
     ADD CONSTRAINT provider_pkey PRIMARY KEY (id);
 
---
--- Name: fkmfmmy1ag4cn0n5ddhajy13oh6; Type: FK CONSTRAINT; Schema: public; Owner: nanna
---
-
 ALTER TABLE ONLY provider
-    ADD CONSTRAINT fkmfmmy1ag4cn0n5ddhajy13oh6 FOREIGN KEY (chouette_info_id) REFERENCES chouette_info(id);
+    ADD CONSTRAINT p_chouette_info_fkey FOREIGN KEY (chouette_info_id) REFERENCES chouette_info(id);
 
 ALTER TABLE ONLY chouette_info_service_link_modes
     ADD CONSTRAINT chouette_info_fkey FOREIGN KEY (chouette_info_id) REFERENCES chouette_info(id) ON DELETE CASCADE;
-
---
--- PostgreSQL database dump complete
---
-
