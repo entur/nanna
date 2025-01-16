@@ -25,6 +25,8 @@ spring.datasource.username=<your-username>
 spring.datasource.password=<your-password>
 spring.cloud.gcp.sql.enabled=false
 
+flyway.locations=classpath:db/migration/common,classpath:db/migration/dev
+
 server.port=11102
 server.host=localhost
 ```
