@@ -71,3 +71,30 @@ ALTER TABLE ONLY provider
 
 ALTER TABLE ONLY chouette_info_service_link_modes
     ADD CONSTRAINT chouette_info_fkey FOREIGN KEY (chouette_info_id) REFERENCES chouette_info(id) ON DELETE CASCADE;
+
+CREATE SEQUENCE hibernate_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER TABLE hibernate_sequence OWNER TO nanna;
+
+CREATE SEQUENCE chouette_info_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+select setval('chouette_info_seq',  (SELECT MAX(id) + 1 FROM chouette_info));
+
+CREATE SEQUENCE provider_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+select setval('provider_seq',  (SELECT MAX(id) + 1 FROM provider));
