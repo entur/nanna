@@ -27,6 +27,8 @@ spring.cloud.gcp.sql.enabled=false
 
 flyway.locations=classpath:db/migration/common,classpath:db/migration/dev
 
+nanna.security.authorization-service=token-based
+
 server.port=11102
 server.host=localhost
 ```
