@@ -102,3 +102,6 @@ insert into public.provider(id, name, chouette_info_id) values (1022, 'RB/Flytog
 insert into public.provider(id, name, chouette_info_id) values (1023, 'RB/Test org 1', 1023);
 insert into public.provider(id, name, chouette_info_id) values (1024, 'RB/Test org 2', 1024);
 insert into public.provider(id, name, chouette_info_id) values (1025, 'RB/Norgesbuss', 1025);
+
+alter sequence chouette_info_seq restart with 20000;
+alter sequence provider_seq restart with 20000;
