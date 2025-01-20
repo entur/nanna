@@ -40,7 +40,9 @@ public class NannaWebSecurityConfiguration {
         "Access-Control-Request-Headers",
         "Authorization",
         "x-correlation-id",
-        "Et-Client-Name"
+        "Et-Client-Name",
+        "baggage",
+        "sentry-trace"
       )
     );
     configuration.addAllowedOrigin("*");
