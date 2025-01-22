@@ -1,0 +1,58 @@
+apiVersion: v1
+data:
+  application.properties: |+
+    spring.profiles.active=auth0
+
+    # Database
+    spring.jpa.database=POSTGRESQL
+    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+    spring.jpa.properties.hibernate.boot.allow_jdbc_metadata_access=false
+    spring.jpa.open-in-view=false
+    spring.datasource.platform=postgres
+    spring.cloud.gcp.sql.database-name=nanna
+    spring.cloud.gcp.sql.instance-connection-name={{ .Values.gcp.databaseInstance }}
+    spring.database.driverClassName=org.postgresql.Driver
+    spring.flyway.table=schema_version
+
+    # Spring Web
+    server.port={{ .Values.service.http.internalPort }}
+    server.compression.enabled=true
+    server.shutdown=graceful
+    spring.lifecycle.timeout-per-shutdown-phase=10s
+
+    # Chouette
+    chouette.rest.referential.base.url={{ .Values.chouette.service }}/chouette_iev/referentials
+
+    # OAuth2 Resource Server
+    nanna.oauth2.resourceserver.auth0.ror.claim.namespace=https://ror.entur.io/
+
+    # OAuth2 Resource Server for Entur Partner tenant
+    nanna.oauth2.resourceserver.auth0.entur.partner.jwt.issuer-uri={{ .Values.auth0.entur.partner.url }}
+    nanna.oauth2.resourceserver.auth0.entur.partner.jwt.audience={{ .Values.auth0.ror.audience }}
+
+    # OAuth2 Resource Server for Entur internal tenant
+    nanna.oauth2.resourceserver.auth0.entur.internal.jwt.issuer-uri={{ .Values.auth0.entur.internal.url }}
+    nanna.oauth2.resourceserver.auth0.entur.internal.jwt.audience={{ .Values.auth0.ror.audience }}
+
+    # OAuth2 Resource Server for RoR tenant
+    nanna.oauth2.resourceserver.auth0.ror.jwt.issuer-uri={{ .Values.auth0.ror.url }}
+    nanna.oauth2.resourceserver.auth0.ror.jwt.audience={{ .Values.auth0.ror.audience }}
+
+    # Authorization
+    nanna.security.authorization-service=token-based
+
+    # Actuator
+    management.server.port=9001
+    management.endpoints.enabled-by-default=false
+    management.endpoint.info.enabled=true
+    management.endpoint.health.enabled=true
+    management.endpoint.health.group.readiness.include=readinessState,db
+    management.endpoint.prometheus.enabled=true
+    management.endpoints.web.exposure.include=info,health,prometheus
+
+kind: ConfigMap
+metadata:
+  name: {{ template "nanna.name" . }}-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "common.labels" . | indent 4 }}

@@ -1,0 +1,28 @@
+replicas: 2
+gcp:
+  databaseInstance: ent-nanna-dev:europe-west1:nanna-db-pg13
+
+chouette:
+  service: http://chouette.dev.entur.internal
+
+ingress:
+  domain: .dev.entur.io
+  providers:
+    name: timetable-admin-v2-providers-gcp2
+
+auth0:
+  ror:
+    url: https://ror-entur-dev.eu.auth0.com/
+    audience: https://ror.api.dev.entur.io
+  entur:
+    internal:
+      url: https://internal.dev.entur.org/
+    partner:
+      url: https://partner.dev.entur.org/
+    domain: ror-entur-dev.eu.auth0.com
+#  admin:
+#    client:
+#      id: dXrBh0VYvPEbz3tCTQzSudyde5hK93mL
+#    domain: ror-entur-dev.eu.auth0.com
+
+monitoringEnabled: true
