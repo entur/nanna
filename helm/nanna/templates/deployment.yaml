@@ -41,8 +41,6 @@ spec:
               value: Europe/Oslo
           envFrom:
             - secretRef:
-                name: auth-credentials
-            - secretRef:
                 name: psql-credentials
           ports:
             - containerPort: 8080
