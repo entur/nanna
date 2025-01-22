@@ -25,7 +25,7 @@ spring.datasource.username=<your-username>
 spring.datasource.password=<your-password>
 spring.cloud.gcp.sql.enabled=false
 
-flyway.locations=classpath:db/migration/common,classpath:db/migration/dev
+spring.flyway.locations=classpath:db/migration/common,classpath:db/migration/dev
 
 nanna.security.authorization-service=token-based
 
