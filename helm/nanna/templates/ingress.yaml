@@ -6,7 +6,7 @@ metadata:
     {{- include "common.labels" . | indent 4 }}
   annotations:
     kubernetes.io/ingress.class: traefik
-  name: timetable-admin-v2-providers
+  name: timetable-admin-v1-providers
   namespace: {{ .Release.Namespace }}
 spec:
   rules:

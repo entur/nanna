@@ -8,7 +8,7 @@ chouette:
 ingress:
   domain: .dev.entur.io
   providers:
-    name: timetable-admin-v2-providers-gcp2
+    name: timetable-admin-v1-providers
 
 auth0:
   ror:
