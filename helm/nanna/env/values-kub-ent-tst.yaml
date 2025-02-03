@@ -1,0 +1,24 @@
+replicas: 2
+gcp:
+  databaseInstance: ent-nanna-tst:europe-west1:nanna-db-pg13
+
+chouette:
+  service: http://chouette.tst.entur.internal
+
+ingress:
+  domain: .staging.entur.io
+  providers:
+    name: timetable-admin-v1-providers
+
+auth0:
+  ror:
+    url: https://ror-entur-staging.eu.auth0.com/
+    audience: https://ror.api.staging.entur.io
+  entur:
+    internal:
+      url: https://internal.staging.entur.org/
+    partner:
+      url: https://partner.staging.entur.org/
+    domain: ror-entur-staging.eu.auth0.com
+
+monitoringEnabled: true
