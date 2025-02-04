@@ -19,10 +19,5 @@ auth0:
       url: https://internal.dev.entur.org/
     partner:
       url: https://partner.dev.entur.org/
-    domain: ror-entur-dev.eu.auth0.com
-#  admin:
-#    client:
-#      id: dXrBh0VYvPEbz3tCTQzSudyde5hK93mL
-#    domain: ror-entur-dev.eu.auth0.com
 
 monitoringEnabled: true
