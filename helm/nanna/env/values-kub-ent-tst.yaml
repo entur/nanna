@@ -19,6 +19,5 @@ auth0:
       url: https://internal.staging.entur.org/
     partner:
       url: https://partner.staging.entur.org/
-    domain: ror-entur-staging.eu.auth0.com
 
 monitoringEnabled: true
