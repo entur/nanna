@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: "daily"
     ignore:
-      - dependency-name: "eclipse-temurin"
+      - dependency-name: "bellsoft/liberica-openjdk-alpine"
         update-types: [ "version-update:semver-major" ]
 
   - package-ecosystem: "github-actions"
