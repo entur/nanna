@@ -1,4 +1,4 @@
-FROM bellsoft/liberica-openjdk-alpine:21.0.5-11
+FROM bellsoft/liberica-openjdk-alpine:21-37
 RUN apk update && apk upgrade && apk add --no-cache tini
 WORKDIR /deployments
 COPY target/nanna-*-SNAPSHOT.jar nanna.jar
