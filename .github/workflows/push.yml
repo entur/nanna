@@ -41,6 +41,7 @@ jobs:
         with:
           path: target/*.jar
       - name: Sonar Scan
+        if: github.actor != 'dependabot[bot]'
         env:
           SONAR_TOKEN: ${{ secrets.ENTUR_SONAR_PASSWORD }}
           SONAR_PROJECT_NAME: ${{ github.event.repository.name }}
