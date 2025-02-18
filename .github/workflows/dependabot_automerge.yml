@@ -16,7 +16,7 @@ jobs:
           wget https://raw.githubusercontent.com/entur/ror-maven-settings/master/.m2/settings.xml -O .github/workflows/settings.xml
       - uses: actions/setup-java@v4
         with:
-          java-version: 21.0.1+12
+          java-version: 21.0.6+11
           distribution: liberica
           cache: 'maven'
       - run: mvn verify -s .github/workflows/settings.xml
