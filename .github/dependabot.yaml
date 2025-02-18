@@ -4,7 +4,13 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-
+    groups:
+      auto-merge-minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "*"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
