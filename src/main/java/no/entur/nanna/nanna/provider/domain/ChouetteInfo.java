@@ -27,19 +27,11 @@ public class ChouetteInfo {
   @Column(name = "cuser")
   public String user;
 
-  public String dataFormat;
-  public boolean enableValidation;
   public boolean allowCreateMissingStopPlace;
-  public boolean enableStopPlaceIdMapping;
-  public boolean enableCleanImport;
   public boolean enableAutoImport;
   public boolean enableAutoValidation;
   public boolean enableBlocksExport;
   public boolean generateDatedServiceJourneyIds;
-  public boolean googleUpload;
-
-  @Column(name = "google_qa_upload")
-  public boolean googleQAUpload;
 
   @ElementCollection(fetch = FetchType.EAGER)
   @CollectionTable(
@@ -98,17 +90,8 @@ public class ChouetteInfo {
       ", user='" +
       user +
       '\'' +
-      ", enableValidation='" +
-      enableValidation +
-      '\'' +
       ", allowCreateMissingStopPlace='" +
       allowCreateMissingStopPlace +
-      '\'' +
-      ", enableStopPlaceIdMapping='" +
-      enableStopPlaceIdMapping +
-      '\'' +
-      ", enableCleanImport='" +
-      enableCleanImport +
       '\'' +
       ", enableAutoImport='" +
       enableAutoImport +
@@ -124,12 +107,6 @@ public class ChouetteInfo {
       '\'' +
       ", generateDatedServiceJourneyIds='" +
       generateDatedServiceJourneyIds +
-      '\'' +
-      ", googleUpload='" +
-      googleUpload +
-      '\'' +
-      ", googleQAUpload='" +
-      googleQAUpload +
       '\'' +
       '}'
     );
