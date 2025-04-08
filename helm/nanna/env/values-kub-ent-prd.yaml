@@ -10,6 +10,9 @@ ingress:
   providers:
     name: timetable-admin-v1-providers
 
+organisation:
+  service: http://baba.prd.entur.internal
+
 auth0:
   ror:
     url: https://auth2.entur.org/

@@ -48,7 +48,7 @@ data:
     # Authorization
     nanna.security.authorization-service=token-based
     nanna.security.role.assignment.extractor=baba
-    user.permission.rest.service.url=http://localhost:11101/services/organisations/users
+    user.permission.rest.service.url={{ .Values.organisation.service }}/services/organisations/users
 
     # Actuator
     management.server.port=9001
