@@ -41,13 +41,9 @@
 	<properties>
 		<java.version>21</java.version>
 		<entur.helpers.version>5.6</entur.helpers.version>
-		<auth0.version>2.19.0</auth0.version>
-		<postgis-jdbc.version>2024.1.0</postgis-jdbc.version>
 		<swagger-jersey2.version>2.2.30</swagger-jersey2.version>
-		<wololo.version>0.18.1</wololo.version>
 		<javax.jdo.jdo-api.version>3.2.1</javax.jdo.jdo-api.version>
 		<commons-io.version>2.18.0</commons-io.version>
-		<passay.version>1.6.6</passay.version>
 		<spring-cloud-gcp-dependencies.version>5.9.0</spring-cloud-gcp-dependencies.version>
 		<prettier-java.version>2.1.0</prettier-java.version>
 		<prettier-maven-plugin.version>0.22</prettier-maven-plugin.version>
@@ -117,10 +113,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jersey</artifactId>
 		</dependency>
 		<dependency>
@@ -150,30 +142,12 @@
 			<artifactId>hibernate-spatial</artifactId>
 		</dependency>
 
-		<!-- Auth0 -->
-		<dependency>
-			<groupId>com.auth0</groupId>
-			<artifactId>auth0</artifactId>
-			<version>${auth0.version}</version>
-		</dependency>
-
-		<!-- PostGIS-->
+		<!-- PostgreSQL-->
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.postgis</groupId>
-			<artifactId>postgis-jdbc</artifactId>
-			<version>${postgis-jdbc.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.wololo</groupId>
-			<artifactId>jts2geojson</artifactId>
-			<version>${wololo.version}</version>
 		</dependency>
 
 		<!-- Jackson -->
@@ -190,12 +164,6 @@
 		</dependency>
 
 		<!-- Others -->
-
-		<dependency>
-			<groupId>org.passay</groupId>
-			<artifactId>passay</artifactId>
-			<version>${passay.version}</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
@@ -237,10 +205,6 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>${commons-io.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.freemarker</groupId>
-			<artifactId>freemarker</artifactId>
 		</dependency>
 
 		<!-- test -->
