@@ -90,7 +90,8 @@ public class NannaWebSecurityConfiguration {
         configurer.authenticationManagerResolver(
           multiIssuerAuthenticationManagerResolver
         )
-      );
+      )
+      .oauth2Client(withDefaults());
     return http.build();
   }
 }

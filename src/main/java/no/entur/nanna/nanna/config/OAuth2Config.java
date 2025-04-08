@@ -16,12 +16,15 @@
 
 package no.entur.nanna.nanna.config;
 
+import org.entur.oauth2.AuthorizedWebClientBuilder;
 import org.entur.oauth2.multiissuer.MultiIssuerAuthenticationManagerResolver;
 import org.entur.oauth2.multiissuer.MultiIssuerAuthenticationManagerResolverBuilder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.reactive.function.client.WebClient;
 
 /**
  * Configure Spring Beans for OAuth2 resource server and OAuth2 client security.
@@ -62,6 +65,29 @@ public class OAuth2Config {
       .withRorAuth0Issuer(rorAuth0Issuer)
       .withRorAuth0Audience(rorAuth0Audience)
       .withRorAuth0ClaimNamespace(rorAuth0ClaimNamespace)
+      .build();
+  }
+
+  /**
+   * Return a WebClient for authorized API calls.
+   * The WebClient inserts a JWT bearer token in the Authorization HTTP header.
+   * The JWT token is obtained from the configured Authorization Server.
+   *
+   * @param properties The spring.security.oauth2.client.registration.* properties
+   * @param audience   The API audience, required for obtaining a token from Auth0
+   * @return a WebClient for authorized API calls.
+   */
+  @Profile("!test")
+  @Bean
+  WebClient webClient(
+    WebClient.Builder webClientBuilder,
+    OAuth2ClientProperties properties,
+    @Value("${nanna.oauth2.client.audience}") String audience
+  ) {
+    return new AuthorizedWebClientBuilder(webClientBuilder)
+      .withOAuth2ClientProperties(properties)
+      .withAudience(audience)
+      .withClientRegistrationId("nanna")
       .build();
   }
 }

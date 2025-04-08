@@ -42,6 +42,8 @@ spec:
           envFrom:
             - secretRef:
                 name: psql-credentials
+            - secretRef:
+                name: auth0
           ports:
             - containerPort: 8080
               name: http
