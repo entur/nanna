@@ -19,14 +19,17 @@ package no.entur.nanna.nanna.config;
 import no.entur.nanna.nanna.provider.repository.ProviderRepository;
 import org.entur.oauth2.JwtRoleAssignmentExtractor;
 import org.entur.oauth2.user.JwtUserInfoExtractor;
+import org.entur.ror.permission.RemoteBabaRoleAssignmentExtractor;
 import org.rutebanken.helper.organisation.RoleAssignmentExtractor;
 import org.rutebanken.helper.organisation.authorization.AuthorizationService;
 import org.rutebanken.helper.organisation.authorization.DefaultAuthorizationService;
 import org.rutebanken.helper.organisation.authorization.FullAccessAuthorizationService;
 import org.rutebanken.helper.organisation.user.UserInfoExtractor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.client.WebClient;
 
 /**
  * Configure authorization.
@@ -35,13 +38,30 @@ import org.springframework.context.annotation.Configuration;
 public class AuthorizationConfig {
 
   @Bean
-  public RoleAssignmentExtractor roleAssignmentExtractor() {
+  public UserInfoExtractor userInfoExtractor() {
+    return new JwtUserInfoExtractor();
+  }
+
+  @ConditionalOnProperty(
+    value = "nanna.security.role.assignment.extractor",
+    havingValue = "jwt",
+    matchIfMissing = true
+  )
+  @Bean
+  public RoleAssignmentExtractor jwtRoleAssignmentExtractor() {
     return new JwtRoleAssignmentExtractor();
   }
 
+  @ConditionalOnProperty(
+    value = "nanna.security.role.assignment.extractor",
+    havingValue = "baba"
+  )
   @Bean
-  public UserInfoExtractor userInfoExtractor() {
-    return new JwtUserInfoExtractor();
+  public RoleAssignmentExtractor babaRoleAssignmentExtractor(
+    WebClient webClient,
+    @Value("${user.permission.rest.service.url}") String url
+  ) {
+    return new RemoteBabaRoleAssignmentExtractor(webClient, url);
   }
 
   @ConditionalOnProperty(

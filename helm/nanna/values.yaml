@@ -11,3 +11,4 @@ secrets:
   psql-credentials:
     - SPRING_DATASOURCE_USERNAME
     - SPRING_DATASOURCE_PASSWORD
+

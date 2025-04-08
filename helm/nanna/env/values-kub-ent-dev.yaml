@@ -20,4 +20,10 @@ auth0:
     partner:
       url: https://partner.dev.entur.org/
 
+oauth2:
+  client:
+    id: U36z7scHWwDihVMZdPRlWP6CZjSY38XX
+    url: https://internal.dev.entur.org/oauth/token
+    audience: https://ror.api.dev.entur.io
+
 monitoringEnabled: true

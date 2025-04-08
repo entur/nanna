@@ -39,8 +39,16 @@ data:
     nanna.oauth2.resourceserver.auth0.ror.jwt.issuer-uri={{ .Values.auth0.ror.url }}
     nanna.oauth2.resourceserver.auth0.ror.jwt.audience={{ .Values.auth0.ror.audience }}
 
+    # OAuth2 Client
+    spring.security.oauth2.client.registration.nanna.authorization-grant-type=client_credentials
+    spring.security.oauth2.client.registration.nanna.client-id={{ .Values.oauth2.client.id }}
+    spring.security.oauth2.client.provider.nanna.token-uri={{ .Values.oauth2.client.url }}
+    nanna.oauth2.client.audience={{ .Values.oauth2.client.audience }}
+
     # Authorization
     nanna.security.authorization-service=token-based
+    nanna.security.role.assignment.extractor=baba
+    user.permission.rest.service.url=http://localhost:11101/services/organisations/users
 
     # Actuator
     management.server.port=9001

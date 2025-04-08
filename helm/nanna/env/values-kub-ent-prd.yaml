@@ -20,4 +20,10 @@ auth0:
     partner:
       url: https://partner.entur.org/
 
+  oauth2:
+    client:
+      id: xxxxx
+      url: https://internal.entur.org/oauth/token
+      audience: https://ror.api.entur.io
+
 monitoringEnabled: true
