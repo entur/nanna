@@ -13,6 +13,8 @@ ingress:
 organisation:
   service: http://baba.tst.entur.internal
 
+roleAssignmentExtractor: jwt
+
 auth0:
   ror:
     url: https://ror-entur-staging.eu.auth0.com/

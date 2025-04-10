@@ -13,6 +13,8 @@ ingress:
 organisation:
   service: http://baba.dev.entur.internal
 
+roleAssignmentExtractor: baba
+
 auth0:
   ror:
     url: https://ror-entur-dev.eu.auth0.com/
