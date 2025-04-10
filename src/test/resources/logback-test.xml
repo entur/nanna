@@ -22,6 +22,9 @@
     <logger name="org" level="INFO"/>
     <logger name="io" level="INFO"/>
 
+    <!-- Ignore warning on Google Cloud credentials in unit tests -->
+    <logger name="com.google.cloud.spring.core.DefaultCredentialsProvider" level="ERROR"/>
+
     <root level="INFO">
         <appender-ref ref="CONSOLE-ASYNC" />
     </root>
