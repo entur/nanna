@@ -27,7 +27,7 @@ auth0:
 
   oauth2:
     client:
-      id: xxxxx
+      id: zRXrdCvSIGNHkC2UtM4JgVvyCtTllRgo
       url: https://internal.staging.entur.org/oauth/token
       audience: https://ror.api.staging.entur.io
 

@@ -27,7 +27,7 @@ auth0:
 
   oauth2:
     client:
-      id: xxxxx
+      id: 2vJ3h0LzQZGmX2JIc72yHqXU5QHrlULV
       url: https://internal.entur.org/oauth/token
       audience: https://ror.api.entur.io
 
