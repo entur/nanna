@@ -25,11 +25,11 @@ auth0:
     partner:
       url: https://partner.staging.entur.org/
 
-  oauth2:
-    client:
-      id: zRXrdCvSIGNHkC2UtM4JgVvyCtTllRgo
-      url: https://internal.staging.entur.org/oauth/token
-      audience: https://ror.api.staging.entur.io
+oauth2:
+  client:
+    id: zRXrdCvSIGNHkC2UtM4JgVvyCtTllRgo
+    url: https://internal.staging.entur.org/oauth/token
+    audience: https://ror.api.staging.entur.io
 
 
 monitoringEnabled: true
