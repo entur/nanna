@@ -13,6 +13,8 @@ ingress:
 organisation:
   service: http://baba.prd.entur.internal
 
+roleAssignmentExtractor: jwt
+
 auth0:
   ror:
     url: https://auth2.entur.org/
