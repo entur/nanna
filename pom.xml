@@ -43,7 +43,7 @@
 		<entur.helpers.version>5.6</entur.helpers.version>
 		<swagger-jersey2.version>2.2.30</swagger-jersey2.version>
 		<javax.jdo.jdo-api.version>3.2.1</javax.jdo.jdo-api.version>
-		<commons-io.version>2.18.0</commons-io.version>
+		<commons-io.version>2.19.0</commons-io.version>
 		<spring-cloud-gcp-dependencies.version>5.9.0</spring-cloud-gcp-dependencies.version>
 		<prettier-java.version>2.1.0</prettier-java.version>
 		<prettier-maven-plugin.version>0.22</prettier-maven-plugin.version>
