@@ -13,7 +13,7 @@ ingress:
 organisation:
   service: http://baba.tst.entur.internal
 
-roleAssignmentExtractor: jwt
+roleAssignmentExtractor: baba
 
 auth0:
   ror:
