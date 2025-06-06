@@ -20,6 +20,7 @@ import no.entur.nanna.nanna.provider.repository.ProviderRepository;
 import org.entur.oauth2.JwtRoleAssignmentExtractor;
 import org.entur.oauth2.user.JwtUserInfoExtractor;
 import org.entur.ror.permission.RemoteBabaRoleAssignmentExtractor;
+import org.entur.ror.permission.RemoteBabaUserInfoExtractor;
 import org.rutebanken.helper.organisation.RoleAssignmentExtractor;
 import org.rutebanken.helper.organisation.authorization.AuthorizationService;
 import org.rutebanken.helper.organisation.authorization.DefaultAuthorizationService;
@@ -37,9 +38,26 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class AuthorizationConfig {
 
+  @ConditionalOnProperty(
+    value = "nanna.security.role.assignment.extractor",
+    havingValue = "jwt",
+    matchIfMissing = true
+  )
   @Bean
-  public UserInfoExtractor userInfoExtractor() {
+  public UserInfoExtractor jwtUserInfoExtractor() {
     return new JwtUserInfoExtractor();
+  }
+
+  @ConditionalOnProperty(
+    value = "nanna.security.role.assignment.extractor",
+    havingValue = "baba"
+  )
+  @Bean
+  public UserInfoExtractor babaUserInfoExtractor(
+    WebClient webClient,
+    @Value("${user.permission.rest.service.url}") String url
+  ) {
+    return new RemoteBabaUserInfoExtractor(webClient, url);
   }
 
   @ConditionalOnProperty(
