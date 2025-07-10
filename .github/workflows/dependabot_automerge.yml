@@ -49,3 +49,13 @@ jobs:
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  docker-build:
+    if: github.repository_owner == 'entur' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [ dependabot-automerge ]
+    uses: entur/gha-docker/.github/workflows/build.yml@v1
+    with:
+      build_artifact_name: artifact
+      build_artifact_path: target
+  docker-push:
+    needs: [ docker-build ]
+    uses: entur/gha-docker/.github/workflows/push.yml@v1
