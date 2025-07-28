@@ -18,7 +18,7 @@ package no.entur.nanna.nanna.config;
 
 import no.entur.nanna.nanna.provider.repository.ProviderRepository;
 import org.entur.oauth2.JwtRoleAssignmentExtractor;
-import org.entur.oauth2.user.JwtUserInfoExtractor;
+import org.entur.oauth2.user.EnturJwtUserInfoExtractor;
 import org.entur.ror.permission.RemoteBabaRoleAssignmentExtractor;
 import org.entur.ror.permission.RemoteBabaUserInfoExtractor;
 import org.rutebanken.helper.organisation.RoleAssignmentExtractor;
@@ -45,7 +45,7 @@ public class AuthorizationConfig {
   )
   @Bean
   public UserInfoExtractor jwtUserInfoExtractor() {
-    return new JwtUserInfoExtractor();
+    return new EnturJwtUserInfoExtractor();
   }
 
   @ConditionalOnProperty(
