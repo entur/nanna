@@ -18,7 +18,7 @@ provider "kubernetes" {}
 
 resource "google_sql_database_instance" "db_instance" {
   name             = "nanna-db-pg13"
-  database_version = "POSTGRES_13"
+  database_version = "POSTGRES_17"
   project          = var.gcp_resources_project
   region           = var.db_region
 
