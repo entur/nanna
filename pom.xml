@@ -44,7 +44,7 @@
 		<swagger-jersey2.version>2.2.36</swagger-jersey2.version>
 		<javax.jdo.jdo-api.version>3.2.1</javax.jdo.jdo-api.version>
 		<commons-io.version>2.20.0</commons-io.version>
-		<spring-cloud-gcp-dependencies.version>6.2.3</spring-cloud-gcp-dependencies.version>
+		<spring-cloud-gcp-dependencies.version>7.3.1</spring-cloud-gcp-dependencies.version>
 		<prettier-java.version>2.1.0</prettier-java.version>
 		<prettier-maven-plugin.version>0.22</prettier-maven-plugin.version>
 		<plugin.prettier.goal>write</plugin.prettier.goal>
