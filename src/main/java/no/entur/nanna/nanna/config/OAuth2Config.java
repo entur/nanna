@@ -16,6 +16,9 @@
 
 package no.entur.nanna.nanna.config;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import org.entur.oauth2.AuthorizedWebClientBuilder;
 import org.entur.oauth2.multiissuer.MultiIssuerAuthenticationManagerResolver;
 import org.entur.oauth2.multiissuer.MultiIssuerAuthenticationManagerResolverBuilder;
@@ -37,19 +40,19 @@ public class OAuth2Config {
   public MultiIssuerAuthenticationManagerResolver multiIssuerAuthenticationManagerResolver(
     @Value(
       "${nanna.oauth2.resourceserver.auth0.entur.internal.jwt.audience:}"
-    ) String enturInternalAuth0Audience,
+    ) String enturInternalAuth0Audiences,
     @Value(
       "${nanna.oauth2.resourceserver.auth0.entur.internal.jwt.issuer-uri:}"
     ) String enturInternalAuth0Issuer,
     @Value(
       "${nanna.oauth2.resourceserver.auth0.entur.partner.jwt.audience:}"
-    ) String enturPartnerAuth0Audience,
+    ) String enturPartnerAuth0Audiences,
     @Value(
       "${nanna.oauth2.resourceserver.auth0.entur.partner.jwt.issuer-uri:}"
     ) String enturPartnerAuth0Issuer,
     @Value(
       "${nanna.oauth2.resourceserver.auth0.ror.jwt.audience:}"
-    ) String rorAuth0Audience,
+    ) String rorAuth0Audiences,
     @Value(
       "${nanna.oauth2.resourceserver.auth0.ror.jwt.issuer-uri:}"
     ) String rorAuth0Issuer,
@@ -59,13 +62,31 @@ public class OAuth2Config {
   ) {
     return new MultiIssuerAuthenticationManagerResolverBuilder()
       .withEnturInternalAuth0Issuer(enturInternalAuth0Issuer)
-      .withEnturInternalAuth0Audience(enturInternalAuth0Audience)
+      .withEnturInternalAuth0Audiences(
+        parseAudiences(enturInternalAuth0Audiences)
+      )
       .withEnturPartnerAuth0Issuer(enturPartnerAuth0Issuer)
-      .withEnturPartnerAuth0Audience(enturPartnerAuth0Audience)
+      .withEnturPartnerAuth0Audiences(
+        parseAudiences(enturPartnerAuth0Audiences)
+      )
       .withRorAuth0Issuer(rorAuth0Issuer)
-      .withRorAuth0Audience(rorAuth0Audience)
+      .withRorAuth0Audience(parseFirstAudience(rorAuth0Audiences))
       .withRorAuth0ClaimNamespace(rorAuth0ClaimNamespace)
       .build();
+  }
+
+  private List<String> parseAudiences(String audiences) {
+    if (audiences == null || audiences.trim().isEmpty()) {
+      return Collections.emptyList();
+    }
+    return Arrays.asList(audiences.split(","));
+  }
+
+  private String parseFirstAudience(String audiences) {
+    if (audiences == null || audiences.trim().isEmpty()) {
+      return "";
+    }
+    return audiences.split(",")[0].trim();
   }
 
   /**

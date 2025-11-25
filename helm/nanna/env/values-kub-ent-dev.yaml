@@ -22,8 +22,10 @@ auth0:
   entur:
     internal:
       url: https://internal.dev.entur.org/
+      audience: https://ror.api.dev.entur.io
     partner:
       url: https://partner.dev.entur.org/
+      audience: https://ror.api.dev.entur.io,https://api.dev.entur.io,https://portal.dev.entur.org
 
 oauth2:
   client:
