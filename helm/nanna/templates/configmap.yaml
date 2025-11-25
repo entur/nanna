@@ -24,9 +24,6 @@ data:
     # Chouette
     chouette.rest.referential.base.url={{ .Values.chouette.service }}/chouette_iev/referentials
 
-    # OAuth2 Resource Server
-    nanna.oauth2.resourceserver.auth0.ror.claim.namespace=https://ror.entur.io/
-
     # OAuth2 Resource Server for Entur Partner tenant
     nanna.oauth2.resourceserver.auth0.entur.partner.jwt.issuer-uri={{ .Values.auth0.entur.partner.url }}
     nanna.oauth2.resourceserver.auth0.entur.partner.jwt.audience={{ .Values.auth0.entur.partner.audience }}
@@ -34,10 +31,6 @@ data:
     # OAuth2 Resource Server for Entur internal tenant
     nanna.oauth2.resourceserver.auth0.entur.internal.jwt.issuer-uri={{ .Values.auth0.entur.internal.url }}
     nanna.oauth2.resourceserver.auth0.entur.internal.jwt.audience={{ .Values.auth0.entur.internal.audience }}
-
-    # OAuth2 Resource Server for RoR tenant
-    nanna.oauth2.resourceserver.auth0.ror.jwt.issuer-uri={{ .Values.auth0.ror.url }}
-    nanna.oauth2.resourceserver.auth0.ror.jwt.audience={{ .Values.auth0.ror.audience }}
 
     # OAuth2 Client
     spring.security.oauth2.client.registration.nanna.authorization-grant-type=client_credentials

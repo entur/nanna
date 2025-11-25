@@ -49,16 +49,7 @@ public class OAuth2Config {
     ) String enturPartnerAuth0Audiences,
     @Value(
       "${nanna.oauth2.resourceserver.auth0.entur.partner.jwt.issuer-uri:}"
-    ) String enturPartnerAuth0Issuer,
-    @Value(
-      "${nanna.oauth2.resourceserver.auth0.ror.jwt.audience:}"
-    ) String rorAuth0Audiences,
-    @Value(
-      "${nanna.oauth2.resourceserver.auth0.ror.jwt.issuer-uri:}"
-    ) String rorAuth0Issuer,
-    @Value(
-      "${nanna.oauth2.resourceserver.auth0.ror.claim.namespace:}"
-    ) String rorAuth0ClaimNamespace
+    ) String enturPartnerAuth0Issuer
   ) {
     return new MultiIssuerAuthenticationManagerResolverBuilder()
       .withEnturInternalAuth0Issuer(enturInternalAuth0Issuer)
@@ -69,9 +60,6 @@ public class OAuth2Config {
       .withEnturPartnerAuth0Audiences(
         parseAudiences(enturPartnerAuth0Audiences)
       )
-      .withRorAuth0Issuer(rorAuth0Issuer)
-      .withRorAuth0Audience(parseFirstAudience(rorAuth0Audiences))
-      .withRorAuth0ClaimNamespace(rorAuth0ClaimNamespace)
       .build();
   }
 
@@ -80,13 +68,6 @@ public class OAuth2Config {
       return Collections.emptyList();
     }
     return Arrays.asList(audiences.split(","));
-  }
-
-  private String parseFirstAudience(String audiences) {
-    if (audiences == null || audiences.trim().isEmpty()) {
-      return "";
-    }
-    return audiences.split(",")[0].trim();
   }
 
   /**
