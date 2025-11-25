@@ -55,4 +55,43 @@ mvn clean install
 ### Purpose
 
 This is an enterprise-grade microservice for managing transportation provider metadata in Entur's ecosystem.
+
+## Recent Changes
+
+### OAuth2 Multi-Audience Support (2025-11-25)
+
+Refactored OAuth2 configuration to support multiple audiences following the same pattern as kilili:
+
+**Changes Made:**
+- Updated `OAuth2Config.java` to use plural audience methods (`withEnturInternalAuth0Audiences`, `withEnturPartnerAuth0Audiences`)
+- Added helper methods `parseAudiences()` and `parseFirstAudience()` to parse comma-separated audience values
+- Updated helm configuration templates to use separate audience values for each tenant
+- Modified environment-specific values files (dev/tst/prd) to include separate audience configurations
+
+**Configuration:**
+- Entur Internal and Entur Partner tenants now support multiple comma-separated audiences
+- RoR tenant uses the first audience from the list (limitation in oauth2-helpers v5.50.0)
+- Audience values are configured separately per tenant in helm values files
+
+**Helm Configuration Example:**
+```yaml
+auth0:
+  entur:
+    internal:
+      url: https://internal.dev.entur.org/
+      audience: https://ror.api.dev.entur.io
+    partner:
+      url: https://partner.dev.entur.org/
+      audience: https://ror.api.dev.entur.io
+  ror:
+    url: https://ror-entur-dev.eu.auth0.com/
+    audience: https://ror.api.dev.entur.io
+```
+
+**Files Modified:**
+- `src/main/java/no/entur/nanna/nanna/config/OAuth2Config.java`
+- `helm/nanna/templates/configmap.yaml`
+- `helm/nanna/env/values-kub-ent-dev.yaml`
+- `helm/nanna/env/values-kub-ent-tst.yaml`
+- `helm/nanna/env/values-kub-ent-prd.yaml`
 understand 
