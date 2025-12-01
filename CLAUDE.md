@@ -83,9 +83,6 @@ auth0:
     partner:
       url: https://partner.dev.entur.org/
       audience: https://ror.api.dev.entur.io
-  ror:
-    url: https://ror-entur-dev.eu.auth0.com/
-    audience: https://ror.api.dev.entur.io
 ```
 
 **Files Modified:**
