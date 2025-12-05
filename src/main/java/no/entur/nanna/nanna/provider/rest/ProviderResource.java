@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import jakarta.ws.rs.*;
 import java.util.Collection;
 import no.entur.nanna.nanna.chouette.ChouetteReferentialService;
+import no.entur.nanna.nanna.enturpartner.OrganisationsCodespacesService;
 import no.entur.nanna.nanna.exceptions.ChouetteServiceException;
 import no.entur.nanna.nanna.exceptions.ReferentialAlreadyExistException;
 import no.entur.nanna.nanna.provider.domain.Provider;
@@ -48,12 +49,16 @@ public class ProviderResource {
 
   private final ChouetteReferentialService chouetteReferentialService;
 
+  private final OrganisationsCodespacesService organisationsCodespacesService;
+
   public ProviderResource(
     ProviderRepository providerRepository,
-    ChouetteReferentialService chouetteReferentialService
+    ChouetteReferentialService chouetteReferentialService,
+    OrganisationsCodespacesService organisationsCodespacesService
   ) {
     this.providerRepository = providerRepository;
     this.chouetteReferentialService = chouetteReferentialService;
+    this.organisationsCodespacesService = organisationsCodespacesService;
   }
 
   @GET
@@ -67,6 +72,12 @@ public class ProviderResource {
         "Unable to find provider with id=" + providerId
       );
     }
+
+    Double enturPartnerOrgId =
+      organisationsCodespacesService.getEnturPartnerOrgIdByCodespace(
+        provider.getChouetteInfo().referential
+      );
+    provider.setEnturPartnerOrgId(enturPartnerOrgId);
     return provider;
   }
 
@@ -132,7 +143,17 @@ public class ProviderResource {
   @GET
   @PostFilter("@authorizationService.canViewRouteData(filterObject.getId())")
   public Collection<Provider> getProviders() {
-    return providerRepository.getProviders();
+    return providerRepository
+      .getProviders()
+      .stream()
+      .peek(p ->
+        p.setEnturPartnerOrgId(
+          organisationsCodespacesService.getEnturPartnerOrgIdByCodespace(
+            p.getChouetteInfo().referential
+          )
+        )
+      )
+      .toList();
   }
 
   @GET
