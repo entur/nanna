@@ -23,12 +23,23 @@ public class Provider {
   @OneToOne(cascade = { CascadeType.ALL })
   public ChouetteInfo chouetteInfo;
 
+  @Transient
+  public Double enturPartnerOrgId;
+
   public Provider() {}
 
   public Provider(Long id, String name, ChouetteInfo chouetteInfo) {
     this.id = id;
     this.name = name;
     this.chouetteInfo = chouetteInfo;
+  }
+
+  public Double getEnturPartnerOrgId() {
+    return enturPartnerOrgId;
+  }
+
+  public void setEnturPartnerOrgId(Double enturPartnerOrgId) {
+    this.enturPartnerOrgId = enturPartnerOrgId;
   }
 
   @Override
