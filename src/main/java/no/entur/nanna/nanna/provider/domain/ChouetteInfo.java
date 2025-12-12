@@ -32,6 +32,7 @@ public class ChouetteInfo {
   public boolean enableAutoValidation;
   public boolean enableBlocksExport;
   public boolean generateDatedServiceJourneyIds;
+  public boolean enableExperimentalImport;
 
   @ElementCollection(fetch = FetchType.EAGER)
   @CollectionTable(
@@ -56,6 +57,7 @@ public class ChouetteInfo {
     this.referential = referential;
     this.organisation = organisation;
     this.user = user;
+    this.enableExperimentalImport = false;
   }
 
   public ChouetteInfo(
@@ -67,6 +69,22 @@ public class ChouetteInfo {
   ) {
     this(prefix, referential, organisation, user);
     this.id = id;
+  }
+
+  public ChouetteInfo(
+    Long id,
+    String xmlns,
+    String referential,
+    String organisation,
+    String user,
+    boolean enableExperimentalImport
+  ) {
+    this.xmlns = xmlns;
+    this.referential = referential;
+    this.organisation = organisation;
+    this.user = user;
+    this.id = id;
+    this.enableExperimentalImport = enableExperimentalImport;
   }
 
   @Override
@@ -108,6 +126,9 @@ public class ChouetteInfo {
       ", generateDatedServiceJourneyIds='" +
       generateDatedServiceJourneyIds +
       '\'' +
+      ", enableExperimentalImport='" +
+      enableExperimentalImport +
+      '\'' +
       '}'
     );
   }
@@ -135,6 +156,9 @@ public class ChouetteInfo {
     if (!Objects.equals(organisation, that.organisation)) {
       return false;
     }
+    if (enableExperimentalImport != that.enableExperimentalImport) {
+      return false;
+    }
     return Objects.equals(user, that.user);
   }
 
@@ -145,6 +169,7 @@ public class ChouetteInfo {
     result = 31 * result + (referential != null ? referential.hashCode() : 0);
     result = 31 * result + (organisation != null ? organisation.hashCode() : 0);
     result = 31 * result + (user != null ? user.hashCode() : 0);
+    result = 31 * result + (enableExperimentalImport ? 1 : 0);
     return result;
   }
 }

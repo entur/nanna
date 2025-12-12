@@ -80,7 +80,8 @@ class JpaProviderRepositoryTest {
             "flybussekspressen",
             "flybussekspressen",
             "Rutebanken",
-            "admin@rutebanken.org"
+            "admin@rutebanken.org",
+            false // default to false for test purposes
           )
         )
       );
@@ -103,7 +104,8 @@ class JpaProviderRepositoryTest {
       "xmlns",
       "refe",
       "org",
-      "user"
+      "user",
+      false // default to false for test purposes
     );
     Provider newProvider = new Provider(null, "junit provider", chouetteInfo);
     repository.createProvider(newProvider);
