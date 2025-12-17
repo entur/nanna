@@ -79,10 +79,10 @@ auth0:
   entur:
     internal:
       url: https://internal.dev.entur.org/
-      audience: https://ror.api.dev.entur.io
+      audience: https://api.dev.entur.io
     partner:
       url: https://partner.dev.entur.org/
-      audience: https://ror.api.dev.entur.io
+      audience: https://api.dev.entur.io
 ```
 
 **Files Modified:**
