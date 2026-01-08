@@ -28,6 +28,6 @@ oauth2:
   client:
     id: 2vJ3h0LzQZGmX2JIc72yHqXU5QHrlULV
     url: https://internal.entur.org/oauth/token
-    audience: https://ror.api.entur.io
+    audience: https://api.entur.io
 
 monitoringEnabled: true
