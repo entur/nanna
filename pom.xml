@@ -48,7 +48,6 @@
 		<prettier-java.version>2.1.0</prettier-java.version>
 		<prettier-maven-plugin.version>0.22</prettier-maven-plugin.version>
 		<plugin.prettier.goal>write</plugin.prettier.goal>
-		<rest-assured.version>5.5.6</rest-assured.version>
 
 		<!-- empty argLine property, the value is set up by Jacoco during unit tests execution -->
 		<argLine/>
@@ -227,12 +226,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>rest-assured</artifactId>
-			<version>${rest-assured.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
