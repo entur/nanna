@@ -34,7 +34,7 @@ public class CorsResponseFilter implements ContainerResponseFilter {
       .getHeaders()
       .add(
         "Access-Control-Allow-Headers",
-        "origin, content-type, accept, authorization"
+        "origin, content-type, accept, authorization, x-correlation-id, et-client-name, baggage, sentry-trace"
       );
     response.getHeaders().add("Access-Control-Allow-Credentials", "true");
     response
