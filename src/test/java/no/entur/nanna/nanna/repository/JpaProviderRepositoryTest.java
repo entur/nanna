@@ -51,7 +51,7 @@ class JpaProviderRepositoryTest {
   static class TestWebSecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) {
       http
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(authz -> authz.anyRequest().permitAll());
