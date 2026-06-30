@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -66,21 +66,31 @@ public class NannaWebSecurityConfiguration {
       .authorizeHttpRequests(authz ->
         authz
           .requestMatchers(
-            AntPathRequestMatcher.antMatcher("/services/providers/openapi.json")
+            PathPatternRequestMatcher
+              .withDefaults()
+              .matcher("/services/providers/openapi.json")
           )
           .permitAll()
           .requestMatchers(
-            AntPathRequestMatcher.antMatcher("/actuator/prometheus")
-          )
-          .permitAll()
-          .requestMatchers(AntPathRequestMatcher.antMatcher("/actuator/health"))
-          .permitAll()
-          .requestMatchers(
-            AntPathRequestMatcher.antMatcher("/actuator/health/liveness")
+            PathPatternRequestMatcher
+              .withDefaults()
+              .matcher("/actuator/prometheus")
           )
           .permitAll()
           .requestMatchers(
-            AntPathRequestMatcher.antMatcher("/actuator/health/readiness")
+            PathPatternRequestMatcher.withDefaults().matcher("/actuator/health")
+          )
+          .permitAll()
+          .requestMatchers(
+            PathPatternRequestMatcher
+              .withDefaults()
+              .matcher("/actuator/health/liveness")
+          )
+          .permitAll()
+          .requestMatchers(
+            PathPatternRequestMatcher
+              .withDefaults()
+              .matcher("/actuator/health/readiness")
           )
           .permitAll()
           .anyRequest()
