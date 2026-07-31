@@ -115,7 +115,7 @@ public class ChouetteInfo {
       enableAutoImport +
       '\'' +
       ", enableAutoValidation='" +
-      enableAutoImport +
+      enableAutoValidation +
       '\'' +
       ", enableBlocksExport='" +
       enableBlocksExport +
