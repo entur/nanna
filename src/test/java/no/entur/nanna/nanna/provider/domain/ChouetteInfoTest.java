@@ -121,7 +121,7 @@ class ChouetteInfoTest {
   void hashCode_equalObjects_produceSameHash() {
     ChouetteInfo a = new ChouetteInfo(1L, "rb", "ref", "org", "u");
     ChouetteInfo b = new ChouetteInfo(1L, "rb", "ref", "org", "u");
-    assertThat(a.hashCode()).isEqualTo(b.hashCode());
+    assertThat(a).hasSameHashCodeAs(b);
   }
 
   // --- toString ---
