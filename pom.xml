@@ -40,7 +40,7 @@
 
 	<properties>
 		<entur.helpers.version>7.2.0</entur.helpers.version>
-		<swagger-jersey2.version>2.2.52</swagger-jersey2.version>
+		<swagger-jersey2.version>2.2.53</swagger-jersey2.version>
 		<javax.jdo.jdo-api.version>3.2.1</javax.jdo.jdo-api.version>
 		<commons-io.version>2.22.0</commons-io.version>
 		<spring-cloud-gcp-dependencies.version>8.1.0</spring-cloud-gcp-dependencies.version>
