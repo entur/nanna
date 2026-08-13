@@ -70,9 +70,10 @@ class ChouetteReferentialRestClientTest {
   @Test
   void createReferential_nonConflict4xxResponse_throwsChouetteServiceException() {
     ExchangeFunction ef = request -> Mono.error(responseException(400));
+    ChouetteReferentialRestClient client400 = clientWith(ef);
     assertThrows(
       ChouetteServiceException.class,
-      () -> clientWith(ef).createReferential(new ChouetteReferentialInfo())
+      () -> client400.createReferential(new ChouetteReferentialInfo())
     );
   }
 
@@ -80,9 +81,10 @@ class ChouetteReferentialRestClientTest {
   void createReferential_networkError_throwsChouetteServiceException() {
     ExchangeFunction ef = request ->
       Mono.error(new RuntimeException("Connection refused"));
+    ChouetteReferentialRestClient clientNetwork = clientWith(ef);
     assertThrows(
       ChouetteServiceException.class,
-      () -> clientWith(ef).createReferential(new ChouetteReferentialInfo())
+      () -> clientNetwork.createReferential(new ChouetteReferentialInfo())
     );
   }
 }
