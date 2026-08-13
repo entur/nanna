@@ -62,18 +62,19 @@ class ChouetteReferentialRestClientTest {
   @Test
   void createReferential_conflictResponse_doesNotThrow() {
     ExchangeFunction ef = request -> Mono.error(responseException(409));
-    assertDoesNotThrow(() ->
-      clientWith(ef).createReferential(new ChouetteReferentialInfo())
-    );
+    ChouetteReferentialRestClient client = clientWith(ef);
+    ChouetteReferentialInfo info = new ChouetteReferentialInfo();
+    assertDoesNotThrow(() -> client.createReferential(info));
   }
 
   @Test
   void createReferential_nonConflict4xxResponse_throwsChouetteServiceException() {
     ExchangeFunction ef = request -> Mono.error(responseException(400));
-    ChouetteReferentialRestClient client400 = clientWith(ef);
+    ChouetteReferentialRestClient client = clientWith(ef);
+    ChouetteReferentialInfo info = new ChouetteReferentialInfo();
     assertThrows(
       ChouetteServiceException.class,
-      () -> client400.createReferential(new ChouetteReferentialInfo())
+      () -> client.createReferential(info)
     );
   }
 
@@ -81,10 +82,11 @@ class ChouetteReferentialRestClientTest {
   void createReferential_networkError_throwsChouetteServiceException() {
     ExchangeFunction ef = request ->
       Mono.error(new RuntimeException("Connection refused"));
-    ChouetteReferentialRestClient clientNetwork = clientWith(ef);
+    ChouetteReferentialRestClient client = clientWith(ef);
+    ChouetteReferentialInfo info = new ChouetteReferentialInfo();
     assertThrows(
       ChouetteServiceException.class,
-      () -> clientNetwork.createReferential(new ChouetteReferentialInfo())
+      () -> client.createReferential(info)
     );
   }
 }
