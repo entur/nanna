@@ -7,7 +7,7 @@ This file was created on 2025-11-25.
 **Nanna** is a **Provider Registry application** for Entur (Norwegian public transport) that manages provider information for the Ninkasi system.
 
 ### Tech Stack
-- **Java 21** with **Spring Boot** (web application)
+- **Java 25** with **Spring Boot** (web application)
 - **PostgreSQL** database with Flyway migrations
 - **Jersey** (JAX-RS) for REST APIs
 - **Hibernate/JPA** for ORM with spatial support
