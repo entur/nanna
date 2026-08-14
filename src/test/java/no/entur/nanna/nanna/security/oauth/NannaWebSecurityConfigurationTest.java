@@ -17,6 +17,7 @@
 package no.entur.nanna.nanna.security.oauth;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import jakarta.servlet.Filter;
@@ -25,7 +26,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -61,7 +61,7 @@ class NannaWebSecurityConfigurationTest {
 
     @Bean
     MultiIssuerAuthenticationManagerResolver multiIssuerAuthenticationManagerResolver() {
-      return Mockito.mock(MultiIssuerAuthenticationManagerResolver.class);
+      return mock(MultiIssuerAuthenticationManagerResolver.class);
     }
 
     @Bean

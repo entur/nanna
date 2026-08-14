@@ -13,14 +13,11 @@ import no.entur.nanna.nanna.provider.domain.ChouetteInfo;
 import no.entur.nanna.nanna.provider.domain.Provider;
 import no.entur.nanna.nanna.provider.repository.ProviderRepository;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class ProviderResourceTest {
 
-  private final ProviderRepository repository = Mockito.mock(
-    ProviderRepository.class
-  );
-  private final ChouetteReferentialService chouetteService = Mockito.mock(
+  private final ProviderRepository repository = mock(ProviderRepository.class);
+  private final ChouetteReferentialService chouetteService = mock(
     ChouetteReferentialService.class
   );
   private final ProviderResource resource = new ProviderResource(

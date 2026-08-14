@@ -6,11 +6,10 @@ import static org.mockito.Mockito.*;
 import no.entur.nanna.nanna.provider.domain.ChouetteInfo;
 import no.entur.nanna.nanna.provider.domain.Provider;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class ReferentialServiceTest {
 
-  private final ChouetteReferentialRestClient mockClient = Mockito.mock(
+  private final ChouetteReferentialRestClient mockClient = mock(
     ChouetteReferentialRestClient.class
   );
   private final ChouetteReferentialService service =
