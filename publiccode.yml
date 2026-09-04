@@ -1,0 +1,53 @@
+publiccodeYmlVersion: "0.5.0"
+
+name: Nanna
+url: https://github.com/entur/nanna
+landingURL: https://github.com/entur/nanna
+
+platforms:
+  - linux
+  - web
+
+categories:
+  - data-collection
+  - it-management
+
+developmentStatus: stable
+softwareType: standalone/backend
+
+organisation:
+  name: Entur AS
+  uri: https://entur.no
+
+usedBy:
+  - Norway (nationwide), Entur
+
+description:
+  en:
+    localisedName: Nanna
+    shortDescription: Provider registry for the timetable data pipeline.
+    longDescription: >
+      Nanna stores data providers, their NeTEx codespaces and the per-provider configuration deciding how
+      deliveries are imported, validated and exported. Served over a REST API, scoped by the caller's user
+      context.
+    documentation: https://github.com/entur/nanna/blob/main/README.md
+    features:
+      - Registry of data providers and NeTEx codespaces
+      - Per-provider pipeline and export configuration
+      - REST API scoped by user context
+
+legal:
+  license: EUPL-1.2
+  mainCopyrightOwner: Entur AS
+
+maintenance:
+  type: internal
+  contacts:
+    - name: Entur Open Data and Journey Planning
+      email: kollektivdata@entur.org
+      affiliation: Entur AS
+
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - en
