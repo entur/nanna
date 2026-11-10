@@ -81,26 +81,26 @@ jobs:
   docker-build:
     if: github.repository_owner == 'entur' && github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [maven-verify]
-    uses: entur/gha-docker/.github/workflows/build.yml@dcdc76ce2d251de20f35a92c566d8fe99036e03e # v1.13.0
+    uses: entur/gha-docker/.github/workflows/build.yml@v1
     with:
       build_artifact_name: artifact
       build_artifact_path: target
   docker-push:
     needs: [docker-build, docker-smoke]
-    uses: entur/gha-docker/.github/workflows/push.yml@dcdc76ce2d251de20f35a92c566d8fe99036e03e # v1.13.0
+    uses: entur/gha-docker/.github/workflows/push.yml@v1
 
   helm-lint:
-    uses: entur/gha-helm/.github/workflows/lint.yml@080c3d42794f3be06b42e3a81ff23a3a0e3b0235 # v2.1.0
+    uses: entur/gha-helm/.github/workflows/lint.yml@v2
     with:
       environment: dev
 
   terraform-lint:
-    uses: entur/gha-terraform/.github/workflows/lint.yml@67c83c025c1810b54a77624ca6090a46dcac9c94 # v3.0.0
+    uses: entur/gha-terraform/.github/workflows/lint.yml@v3
   tf-plan-dev:
     if: ${{ !cancelled() && !contains(needs.*.result, 'failure') }}
     needs: [ terraform-lint, docker-push ]
     name: Terraform Plan DEV
-    uses: entur/gha-terraform/.github/workflows/plan.yml@67c83c025c1810b54a77624ca6090a46dcac9c94 # v3.0.0
+    uses: entur/gha-terraform/.github/workflows/plan.yml@v3
     with:
       environment: dev
 
@@ -119,7 +119,7 @@ jobs:
     if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-dev.outputs.has_changes == 'true' }}
     needs: [ tf-plan-dev, tf-approval-dev ]
     name: Terraform Apply DEV
-    uses: entur/gha-terraform/.github/workflows/apply.yml@67c83c025c1810b54a77624ca6090a46dcac9c94 # v3.0.0
+    uses: entur/gha-terraform/.github/workflows/apply.yml@v3
     with:
       environment: dev
       has_changes: ${{ needs.tf-plan-dev.outputs.has_changes }}
@@ -127,7 +127,7 @@ jobs:
   deploy-dev:
     if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/main' }}
     needs: [ helm-lint, tf-plan-dev, tf-apply-dev, docker-push ]
-    uses: entur/gha-helm/.github/workflows/deploy.yml@080c3d42794f3be06b42e3a81ff23a3a0e3b0235 # v2.1.0
+    uses: entur/gha-helm/.github/workflows/deploy.yml@v2
     with:
       environment: dev
       image: ${{ needs.docker-push.outputs.image_name }}:${{ needs.docker-push.outputs.image_tag }}
@@ -153,7 +153,7 @@ jobs:
     if: ${{ !cancelled() && !contains(needs.*.result, 'failure') }}
     needs: [ terraform-lint, approval-tst ]
     name: Terraform Plan TST
-    uses: entur/gha-terraform/.github/workflows/plan.yml@67c83c025c1810b54a77624ca6090a46dcac9c94 # v3.0.0
+    uses: entur/gha-terraform/.github/workflows/plan.yml@v3
     with:
       environment: tst
 
@@ -172,7 +172,7 @@ jobs:
     if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-tst.outputs.has_changes == 'true' }}
     needs: [ tf-plan-tst, tf-approval-tst ]
     name: Terraform Apply TST
-    uses: entur/gha-terraform/.github/workflows/apply.yml@67c83c025c1810b54a77624ca6090a46dcac9c94 # v3.0.0
+    uses: entur/gha-terraform/.github/workflows/apply.yml@v3
     with:
       environment: tst
       has_changes: ${{ needs.tf-plan-tst.outputs.has_changes }}
@@ -180,7 +180,7 @@ jobs:
   deploy-tst:
     if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/main' }}
     needs: [ approval-tst, tf-plan-tst, tf-apply-tst, docker-push ]
-    uses: entur/gha-helm/.github/workflows/deploy.yml@080c3d42794f3be06b42e3a81ff23a3a0e3b0235 # v2.1.0
+    uses: entur/gha-helm/.github/workflows/deploy.yml@v2
     with:
       environment: tst
       image: ${{ needs.docker-push.outputs.image_name }}:${{ needs.docker-push.outputs.image_tag }}
@@ -206,7 +206,7 @@ jobs:
     if: ${{ !cancelled() && !contains(needs.*.result, 'failure') }}
     needs: [ terraform-lint, approval-prd ]
     name: Terraform Plan PRD
-    uses: entur/gha-terraform/.github/workflows/plan.yml@67c83c025c1810b54a77624ca6090a46dcac9c94 # v3.0.0
+    uses: entur/gha-terraform/.github/workflows/plan.yml@v3
     with:
       environment: prd
 
@@ -225,7 +225,7 @@ jobs:
     if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-prd.outputs.has_changes == 'true' }}
     needs: [ tf-plan-prd, tf-approval-prd ]
     name: Terraform Apply PRD
-    uses: entur/gha-terraform/.github/workflows/apply.yml@67c83c025c1810b54a77624ca6090a46dcac9c94 # v3.0.0
+    uses: entur/gha-terraform/.github/workflows/apply.yml@v3
     with:
       environment: prd
       has_changes: ${{ needs.tf-plan-prd.outputs.has_changes }}
@@ -233,7 +233,7 @@ jobs:
   deploy-prd:
     if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/main' }}
     needs: [ approval-prd, tf-plan-prd, tf-apply-prd, docker-push ]
-    uses: entur/gha-helm/.github/workflows/deploy.yml@080c3d42794f3be06b42e3a81ff23a3a0e3b0235 # v2.1.0
+    uses: entur/gha-helm/.github/workflows/deploy.yml@v2
     with:
       environment: prd
       image: ${{ needs.docker-push.outputs.image_name }}:${{ needs.docker-push.outputs.image_tag }}
