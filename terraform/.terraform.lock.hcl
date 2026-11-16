@@ -2,24 +2,24 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/google" {
-  version     = "6.49.3"
-  constraints = "~> 6.49.0"
+  version     = "8.11.0"
+  constraints = "~> 8.11.0"
   hashes = [
-    "h1:B0aAYvquRi10pbhds8EsrBUW/sy29ebAZ4f/4cyRfS8=",
-    "h1:QkNVeJC7lrQa1pZuCrLBgq7hESIP5IdO1XVOVN0s7T4=",
-    "h1:cU8PRPAD6+W3mCWROYqECv+JwmpDiXFDM8VDQmrsyC0=",
-    "h1:kOOq1McNjfbrTzNoKKT2sZEwNuzAZuAs6dJJ5O9lEfU=",
-    "zh:0ecb3cda6763b671f74dc5a5f1a60a2a2134181bf8869bcafd2608912d0d2940",
-    "zh:1d1b322559f2929baff32ef66c89ba82b7d7808956e05d00235a1efbc8cd5c86",
-    "zh:4561e0b401f1760c954e8a59f0da4e8f9ee07b45bd4144ec5524716373f6f01f",
-    "zh:4e5d9c426e9fcda222de1992e46039db107d0c9a55868196625971151c2b6854",
-    "zh:5686b66bc949d17a9d7babc53961667e6b86fd246ea803b48199f1db92a20062",
-    "zh:5b67ee17674acaaf51f73f3300807fd9aea6a6f1496ee55b61714d8a05f8d871",
-    "zh:650d36bb2a8039125fc0eacc68b57a42542afd11b7dc59690c51ec4e268d7057",
-    "zh:72e34e9e0e13aaa6b854031a176ac8bf56929eb6ff065222e91293e0a2c992cc",
-    "zh:af1a0b3a1e82f0af80676f43144178898eb146f75900a5d9a2640138ff387687",
-    "zh:dc9de3199a0f4f976298b160441ffca16f699f42948fbdc2a1a76bf8bd5dd7f7",
-    "zh:ec55d7c38f1f683a76f74cec80397d3b33d33ac3467e13cafe788c7278b44538",
+    "h1:R1e8efd3fnpQeN17HzPLfvFAvBv4qTsQEVEEHDa+QXE=",
+    "h1:Vso8AvJB/qDIJ1vNORcIj292em5d9ZcndkjKUXHONPI=",
+    "h1:Wx0mcCg4BAModGKKRbKG0WCdeNc1atseaYCVI08Pu1c=",
+    "h1:pgRWEQv+1XOpRaruhb73A17do2AcNIzZBOpsXznyM5E=",
+    "zh:06f745dab16e27e746335e1fea09b504dd6fc5ee5d490acdc1bf623b3758a3cb",
+    "zh:0e844d82d0194c769305afe8a109bbd02ed03d2e2fb7c2128a4f086571ae7412",
+    "zh:212c6a9f1f64ac7056e8e85a96de28f00906a8b87e9301611aa20da370753df3",
+    "zh:32aef908bdfd7a67ed10b04d9396d1cdcb11d5bb0baeb89f50fa567cf86c57fb",
+    "zh:47bdba00b1f59937ddb1c6232ee00b7e651d23cb34ad28c859a8da0e4b2277a6",
+    "zh:7b2bcc663e91f19f8ba9dba75037d7d58aa53ffbf4104a8bb952362b1aef0bf8",
+    "zh:7bdfabf1da462eacceb2d36a8331b35ce70a5f6e4538a14097c47d8958c4067d",
+    "zh:8e2017664ccf3fd6ee45c0e7e2b6351ca3c5e812387b3a679f1adc54d640ffef",
+    "zh:c8fbfb3de6f3ecbb44ece3bb05f232a8cf9cf8899a97ae9dd503a208c16d8552",
+    "zh:d9a36ee8b8b86cae8bcaf9034a254b701fec3a4cd53b5f50a7ccde4d4388e3b4",
+    "zh:e173cb16a4673a7a914531c64e7ff0716b27ed6b46e79c1507e50e1af928b4dd",
     "zh:f569b65999264a9416862bca5cd2a6177d94ccb0424f3a4ef424428912b9cb3c",
   ]
 }
