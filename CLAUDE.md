@@ -36,6 +36,18 @@ Building:
 mvn clean install
 ```
 
+### Docker image
+The `Dockerfile` extracts the Spring Boot layers and runs them on
+`gcr.io/distroless/java25-debian13:nonroot`, in both stages: Temurin JRE, no shell, no package manager.
+The builder's `RUN` is therefore exec form. `nonroot` carries no version, so it is pinned to a digest
+that Dependabot moves. With no shell to expand a
+variable, JVM flags come from `JDK_JAVA_OPTIONS` in `helm/nanna/templates/deployment.yaml`, which the
+launcher reads itself and announces on stderr. The runtime JRE has no shell, `jcmd` or `jstack`. To
+look inside locally, swap the runtime `FROM` for `gcr.io/distroless/java25-debian13:debug-nonroot` (no
+digest) and run with `--entrypoint /busybox/sh`. In the cluster, `kubectl debug -it <pod>
+--image=busybox --target=nanna` shares the JVM's process namespace, and `kill -3 1` writes a thread
+dump to the pod log.
+
 ### Purpose
 
 This is an enterprise-grade microservice for managing transportation provider metadata in Entur's ecosystem.
