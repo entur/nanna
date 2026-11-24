@@ -1,15 +1,14 @@
-FROM bellsoft/liberica-openjre-alpine:25 AS builder
-WORKDIR /builder
-COPY target/*-SNAPSHOT.jar application.jar
-RUN java -Djarmode=tools  -jar application.jar extract --layers --destination extracted
+FROM gcr.io/distroless/java25-debian13:nonroot@sha256:59bbb349c9752fc57b75744b41b1614c9dabe8bb4869523aabd5a4288f6c09a0 AS builder
+# RUN executes as nonroot, which can only write to its home directory.
+WORKDIR /home/nonroot
+COPY target/nanna-*-SNAPSHOT.jar application.jar
+RUN [ "/usr/bin/java", "-Djarmode=tools", "-jar", "application.jar", "extract", "--layers", "--destination", "extracted" ]
 
-FROM bellsoft/liberica-openjre-alpine:25
-RUN apk update && apk upgrade && apk add --no-cache tini
+FROM gcr.io/distroless/java25-debian13:nonroot@sha256:59bbb349c9752fc57b75744b41b1614c9dabe8bb4869523aabd5a4288f6c09a0
 WORKDIR /deployments
-RUN addgroup appuser && adduser --disabled-password appuser --ingroup appuser
-USER appuser
-COPY --from=builder /builder/extracted/dependencies/ ./
-COPY --from=builder /builder/extracted/spring-boot-loader/ ./
-COPY --from=builder /builder/extracted/snapshot-dependencies/ ./
-COPY --from=builder /builder/extracted/application/ ./
-ENTRYPOINT [ "/sbin/tini", "--", "java", "-jar", "application.jar" ]
+COPY --from=builder /home/nonroot/extracted/dependencies/ ./
+COPY --from=builder /home/nonroot/extracted/spring-boot-loader/ ./
+COPY --from=builder /home/nonroot/extracted/snapshot-dependencies/ ./
+COPY --from=builder /home/nonroot/extracted/application/ ./
+# No shell, so JVM flags come from JDK_JAVA_OPTIONS, which the launcher reads itself.
+ENTRYPOINT [ "/usr/bin/java", "-jar", "application.jar" ]
