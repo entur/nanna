@@ -100,7 +100,7 @@ jobs:
       environment: dev
 
   tf-approval-dev:
-    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-dev.outputs.has_changes == 'true' }}
+    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-dev.outputs.has_changes == 'true' && github.ref == 'refs/heads/main' }}
     needs: [ tf-plan-dev ]
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -111,7 +111,7 @@ jobs:
         run: echo "Approve DEV tf plan"
 
   tf-apply-dev:
-    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-dev.outputs.has_changes == 'true' }}
+    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-dev.outputs.has_changes == 'true' && github.ref == 'refs/heads/main' }}
     needs: [ tf-plan-dev, tf-approval-dev ]
     name: Terraform Apply DEV
     uses: entur/gha-terraform/.github/workflows/apply.yml@v3
@@ -131,6 +131,36 @@ jobs:
       namespace: nanna
       release_name: nanna
     secrets: inherit
+
+  # Once this commit is in dev, older main runs still parked at an approval gate are
+  # superseded. Runs that are actively deploying (in_progress) are left alone.
+  cancel-superseded:
+    if: ${{ !cancelled() && needs.deploy-dev.result == 'success' && github.event_name == 'push' }}
+    needs: [ deploy-dev ]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    steps:
+      - name: Cancel older runs waiting for approval
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ids=$(gh run list -R "$GITHUB_REPOSITORY" --workflow push.yml --branch main --event push \
+            --status waiting --limit 100 --json databaseId \
+            --jq ".[] | select(.databaseId < $GITHUB_RUN_ID) | .databaseId") ||
+            { echo "::warning::Could not list waiting runs"; exit 0; }
+          for id in $ids; do
+            # Re-check just before cancelling: the run may have been approved since the listing.
+            status=$(gh run view "$id" -R "$GITHUB_REPOSITORY" --json status --jq .status) || status=unknown
+            if [ "$status" != waiting ]; then
+              echo "Skipping run $id: $status"
+              continue
+            fi
+            echo "Cancelling superseded run $id"
+            gh run cancel "$id" -R "$GITHUB_REPOSITORY" || echo "::warning::Could not cancel run $id"
+          done
 
   # --- TST ---
   approval-tst:
@@ -153,7 +183,7 @@ jobs:
       environment: tst
 
   tf-approval-tst:
-    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-tst.outputs.has_changes == 'true' }}
+    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-tst.outputs.has_changes == 'true' && github.ref == 'refs/heads/main' }}
     needs: [ tf-plan-tst ]
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -164,7 +194,7 @@ jobs:
         run: echo "Approve TST tf plan"
 
   tf-apply-tst:
-    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-tst.outputs.has_changes == 'true' }}
+    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-tst.outputs.has_changes == 'true' && github.ref == 'refs/heads/main' }}
     needs: [ tf-plan-tst, tf-approval-tst ]
     name: Terraform Apply TST
     uses: entur/gha-terraform/.github/workflows/apply.yml@v3
@@ -206,7 +236,7 @@ jobs:
       environment: prd
 
   tf-approval-prd:
-    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-prd.outputs.has_changes == 'true' }}
+    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-prd.outputs.has_changes == 'true' && github.ref == 'refs/heads/main' }}
     needs: [ tf-plan-prd ]
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -217,7 +247,7 @@ jobs:
         run: echo "Approve PRD tf plan"
 
   tf-apply-prd:
-    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-prd.outputs.has_changes == 'true' }}
+    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && needs.tf-plan-prd.outputs.has_changes == 'true' && github.ref == 'refs/heads/main' }}
     needs: [ tf-plan-prd, tf-approval-prd ]
     name: Terraform Apply PRD
     uses: entur/gha-terraform/.github/workflows/apply.yml@v3
